@@ -1,0 +1,8 @@
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = git@github.com:godotengine/godot-cpp.git
+	branch = 4.2
+[submodule "pine"]
+	path = pine
+	url = git@github.com:GovanifY/pine.git
+	branch = master
