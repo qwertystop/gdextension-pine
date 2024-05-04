@@ -28,7 +28,7 @@ public:
 	};
 
 	void _init_ipc(const unsigned int slot, const std::string emulator_name, const bool default_slot);
-	void _init_default_ipc(const DefaultConfigOption x);
+	void _init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0);
 
 	// To start, we will support only memory reads.
 	uint8_t Read8(uint32_t addr);

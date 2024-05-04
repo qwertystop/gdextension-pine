@@ -4,17 +4,34 @@
 using namespace godot;
 
 void GDPine::_bind_methods(){
-// TODO
+    BIND_ENUM_CONSTANT(PCSX2);
+    BIND_ENUM_CONSTANT(RPCS3);
+    ClassDB::bind_method(D_METHOD("_init_ipc", "slot", "emulator_name", "default_slot"), &GDPine::_init_ipc);
+    ClassDB::bind_method(D_METHOD("_init_default_ipc", "selection", "slot"), &GDPine::_init_default_ipc, DEFVAL(0));
+    ClassDB::bind_method(D_METHOD("Read8", "addr"), &GDPine::Read8);
+    ClassDB::bind_method(D_METHOD("Read16", "addr"), &GDPine::Read16);
+    ClassDB::bind_method(D_METHOD("Read32", "addr"), &GDPine::Read32);
+    ClassDB::bind_method(D_METHOD("Read64", "addr"), &GDPine::Read64);
+    ClassDB::bind_method(D_METHOD("ReadMany", "addr", "length_bytes"), &GDPine::ReadMany);
 }
 
 void GDPine::_init_ipc(const unsigned int slot, const std::string emulator_name, const bool default_slot){
-// TODO
-
+    pine_conn = new PINE::Shared(slot, emulator_name, default_slot);
 }
 
-void GDPine::_init_default_ipc(const DefaultConfigOption x){
-// TODO
-
+void GDPine::_init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0){
+    switch (selection)
+    {
+    case PCSX2:
+        _init_ipc((slot == 0) ? 28011 : slot, "pcsx2", (slot == 0));
+        break;
+    case RPCS3:
+        _init_ipc((slot == 0) ? 20812 : slot, "rpcs3", (slot == 0));
+        break;
+    default:
+        ERR_FAIL_MSG("Attempted to initialize nonexistent default.");
+        break;
+    }
 }
 
 uint8_t GDPine::Read8(uint32_t addr){
@@ -65,10 +82,12 @@ PackedByteArray GDPine::ReadMany(uint32_t addr, uint8_t length_bytes){
 
 GDPine::GDPine(){
     // Initialize any variables here.
-    //TODO
 }
 
 GDPine::~GDPine(){
     // Add your cleanup here.
-    //TODO
+    if (pine_conn != nullptr)
+    {
+        delete pine_conn;
+    }
 }
