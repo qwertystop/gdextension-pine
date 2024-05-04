@@ -21,13 +21,13 @@ public:
 	/**
 	 * Emulators for which a default slot exists
 	 */
-	typedef enum DefaultConfigOption : unsigned char
+	enum DefaultConfigOption : unsigned char
 	{
 		PCSX2,
 		RPCS3
 	};
 
-	void _init_ipc(const unsigned int slot, const std::string emulator_name, const bool default_slot);
+	void _init_ipc(const unsigned int slot, const godot::String emulator_name, const bool default_slot);
 	void _init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0);
 
 	// To start, we will support only memory reads.

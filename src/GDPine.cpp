@@ -15,11 +15,11 @@ void GDPine::_bind_methods(){
     ClassDB::bind_method(D_METHOD("ReadMany", "addr", "length_bytes"), &GDPine::ReadMany);
 }
 
-void GDPine::_init_ipc(const unsigned int slot, const std::string emulator_name, const bool default_slot){
-    pine_conn = new PINE::Shared(slot, emulator_name, default_slot);
+void GDPine::_init_ipc(const unsigned int slot, const godot::String emulator_name, const bool default_slot){
+    pine_conn = new PINE::Shared(slot, emulator_name.ascii().get_data(), default_slot);
 }
 
-void GDPine::_init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0){
+void GDPine::_init_default_ipc(const DefaultConfigOption selection, unsigned int slot){
     switch (selection)
     {
     case PCSX2:
