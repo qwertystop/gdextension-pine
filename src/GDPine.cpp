@@ -57,9 +57,9 @@ uint64_t GDPine::Read64(uint32_t addr){
 
 PackedByteArray GDPine::ReadMany(uint32_t addr, uint8_t length_bytes){
     PackedByteArray result = {};
-    ERR_FAIL_COND_V_MSG(addr <= (UINT32_MAX - (length_bytes * 8)),
-                        result, "Max extent of read out of range.");
-
+    ERR_FAIL_COND_V_MSG(addr > (UINT32_MAX - (length_bytes * 8UL)), result, 
+                        vformat("Max extent of read (%d+%d=%d) out of range (max %d).",
+                        addr, length_bytes*8UL, addr+length_bytes*8UL, UINT32_MAX));
     ERR_FAIL_NULL_V_MSG(pine_conn, result, "IPC not initialized.");
 
     // Make a batch of reads
