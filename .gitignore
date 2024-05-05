@@ -1,5 +1,7 @@
 .sconsign.dblite
 .vscode/settings.json
-demo/bin/libgdpine.linux.template_debug.x86_64.so
+demo/bin/*.so
+demo/.godot
+demo/*.import
 src/GDPine.os
 src/register_types.os
