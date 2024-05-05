@@ -27,20 +27,21 @@ public:
 		RPCS3
 	};
 
-	void _init_ipc(const unsigned int slot, const godot::String emulator_name, const bool default_slot);
-	void _init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0);
+	void _init_ipc(const unsigned int slot, const godot::String emulator_name, const bool default_slot) noexcept;
+	void _init_default_ipc(const DefaultConfigOption selection, unsigned int slot = 0) noexcept;
 
 	// To start, we will support only memory reads.
-	uint8_t Read8(uint32_t addr);
-	uint16_t Read16(uint32_t addr);
-	uint32_t Read32(uint32_t addr);
-	uint64_t Read64(uint32_t addr);
-	PackedByteArray ReadMany(uint32_t addr, uint8_t length_bytes);
+	uint8_t Read8(uint32_t addr) noexcept;
+	uint16_t Read16(uint32_t addr) noexcept;
+	uint32_t Read32(uint32_t addr) noexcept;
+	uint64_t Read64(uint32_t addr) noexcept;
+	PackedByteArray ReadMany(uint32_t addr, uint8_t length_bytes) noexcept;
 
 	GDPine();
 	~GDPine();
 };
 
 VARIANT_ENUM_CAST(GDPine::DefaultConfigOption)
+VARIANT_ENUM_CAST(PINE::Shared::IPCStatus)
 
 #endif
