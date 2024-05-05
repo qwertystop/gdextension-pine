@@ -16,7 +16,8 @@ void GDPine::_bind_methods(){
 }
 
 void GDPine::_init_ipc(const unsigned int slot, const godot::String emulator_name, const bool default_slot){
-    pine_conn = new PINE::Shared(slot, emulator_name.ascii().get_data(), default_slot);
+    ERR_FAIL_COND_MSG(pine_conn != nullptr, "IPC already initialized.");
+    pine_conn = std::make_unique<PINE::Shared>(slot, emulator_name.ascii().get_data(), default_slot);
 }
 
 void GDPine::_init_default_ipc(const DefaultConfigOption selection, unsigned int slot){
@@ -86,8 +87,4 @@ GDPine::GDPine(){
 
 GDPine::~GDPine(){
     // Add your cleanup here.
-    if (pine_conn != nullptr)
-    {
-        delete pine_conn;
-    }
 }

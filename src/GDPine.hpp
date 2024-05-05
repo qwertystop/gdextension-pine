@@ -12,7 +12,7 @@ class GDPine : public Node
 	GDCLASS(GDPine, Node)
 
 private:
-	PINE::Shared *pine_conn;
+	std::unique_ptr<PINE::Shared> pine_conn;
 
 protected:
 	static void _bind_methods();
