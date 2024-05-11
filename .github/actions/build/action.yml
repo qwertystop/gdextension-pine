@@ -14,6 +14,9 @@ inputs:
   build-target-type:
     default: 'template_debug'
     description: Build type (template_debug or template_release).
+  godot-cpp:
+    default: godot-cpp
+    description: godot-cpp location
   scons-cache:
     default: .scons-cache/
     description: Scons cache location.
