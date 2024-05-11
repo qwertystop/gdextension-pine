@@ -1,6 +1,6 @@
 name: Build GDExtension for Windows
 on:
-  workflow_call:
+  workflow_dispatch:
 
 env:
   LIBNAME: example
