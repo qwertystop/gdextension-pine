@@ -1,7 +1,6 @@
-name: Build GDExtension
+name: Build GDExtension for Windows
 on:
   workflow_call:
-  push:
 
 env:
   LIBNAME: example
@@ -12,12 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: linux
-            float-precision: double
-            arch: x86_64
-            os: ubuntu-20.04
           - platform: windows
-            float-precision: double
+            float-precision: single
             arch: x86_64
             os: windows-latest
     runs-on: ${{ matrix.os }}
@@ -27,15 +22,6 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
-# Lint
-      #- name: Setup clang-format
-      #  shell: bash
-      #  run: |
-      #    python -m pip install clang-format
-      #- name: Run clang-format
-      #  shell: bash
-      #  run: |
-      #    clang-format src/** --dry-run --Werror
 # Build
       - name: 🔗 GDExtension Build
         uses: ./.github/actions/build
