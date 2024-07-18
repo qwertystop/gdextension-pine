@@ -1,6 +1,5 @@
 .sconsign.dblite
 .vscode/settings.json
-demo/bin/*.so
 demo/.godot
 demo/*.import
 src/GDPine.os
